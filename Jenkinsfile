@@ -19,7 +19,7 @@ pipeline {
 
             bin/viash_tag -b target -t main_build -r itx-aiv.artifactrepo.jnj.com -s ghcr.io -o openpipelines-bio
 
-            bin/viash_push -m release -t main_build
+            bin/viash_push -m release -t main_build --force
           """
         }
       }
