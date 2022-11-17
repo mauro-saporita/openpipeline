@@ -14,6 +14,7 @@ jobs:
         fetch-depth: 0 
 
     - uses: viash-io/viash-actions/setup@main
+      id: install-viash
       with:
         version: develop
         registry: ghcr.io
@@ -23,3 +24,11 @@ jobs:
     - name: Check version of Viash
       run: |
         viash -h
+
+    - uses: viash-io/viash-actions/ns-list@main
+      id: ns-list
+
+    - name: Check output
+      run: |
+        echo version: ${{ steps.install-viash.outputs.version }}
+        echo components_json: ${{ steps.ns-lists.outputs.components_json }}
