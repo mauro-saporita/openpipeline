@@ -16,7 +16,7 @@ jobs:
     - uses: viash-io/viash-actions/setup@main
       id: install-viash
       with:
-        version: develop
+        version: 0.6.3
         registry: ghcr.io
         organization: openpipelines-bio
         target_image_source: https://github.com/openpipelines-bio/openpipeline
