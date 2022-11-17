@@ -5,8 +5,10 @@ on:
   push:
 
 jobs:
-  test-ci:
+  list_components:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.ns-list.outputs.components_json }}
 
     steps:
     - uses: actions/checkout@v3
@@ -28,7 +30,25 @@ jobs:
     - uses: viash-io/viash-actions/ns-list@main
       id: ns-list
 
-    - name: Check output
+  # phase 2
+  viash_test:
+    needs: list_components
+    if: ${{ needs.list_components.outputs.matrix != '[]' && needs.list_components.outputs.matrix != '' }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        component: ${{ fromJson(needs.list_components.outputs.matrix) }}
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Fetch viash
       run: |
-        echo version: ${{ steps.install-viash.outputs.version }}
-        echo components_json: ${{ steps.ns-list.outputs.components_json }}
+        bin/init -n
+        bin/viash -h
+
+    - name: Run test
+      run: |
+        bin/viash config view ${{ matrix.component.config.info }}
