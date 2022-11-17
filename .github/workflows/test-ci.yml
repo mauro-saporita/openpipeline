@@ -29,6 +29,8 @@ jobs:
 
     - uses: viash-io/viash-actions/ns-list@main
       id: ns-list
+      with:
+        query: download_file
 
   # phase 2
   viash_test:
@@ -44,11 +46,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Fetch viash
-      run: |
-        bin/init -n
-        bin/viash -h
+    - uses: viash-io/viash-actions/setup@main
 
     - name: Run test
       run: |
-        bin/viash config view ${{ matrix.component.info.config }}
+        viash test ${{ matrix.component.info.config }}
