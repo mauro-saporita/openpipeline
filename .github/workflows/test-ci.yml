@@ -31,4 +31,4 @@ jobs:
     - name: Check output
       run: |
         echo version: ${{ steps.install-viash.outputs.version }}
-        echo components_json: ${{ steps.ns-lists.outputs.components_json }}
+        echo components_json: ${{ steps.ns-list.outputs.components_json }}
