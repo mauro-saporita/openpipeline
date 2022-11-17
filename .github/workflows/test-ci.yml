@@ -5,7 +5,7 @@ on:
   push:
 
 jobs:
-  list_components:
+  test-ci:
     runs-on: ubuntu-latest
 
     steps:
