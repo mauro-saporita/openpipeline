@@ -14,6 +14,12 @@ jobs:
         fetch-depth: 0 
 
     - uses: viash-io/viash-actions/setup@main
-    - name: Fetch viash
+      with:
+        version: develop
+        registry: ghcr.io
+        organization: openpipelines-bio
+        target_image_source: https://github.com/openpipelines-bio/openpipeline
+
+    - name: Check version of Viash
       run: |
         viash -h
