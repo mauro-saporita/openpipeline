@@ -51,4 +51,4 @@ jobs:
 
     - name: Run test
       run: |
-        bin/viash config view ${{ matrix.component.config.info }}
+        bin/viash config view ${{ matrix.component.info.config }}
